@@ -118,7 +118,7 @@ function initMusicToggle() {
       btn.setAttribute('aria-label', 'Pause background music');
     }).catch(() => {
       // EDIT: add audio/background-music.mp3 to enable music playback
-      console.info('Add a music file at audio/background-music.mp3 to enable playback.');
+      console.info('Add a music file at background-music.mp3 to enable playback.');
     });
   }
 
