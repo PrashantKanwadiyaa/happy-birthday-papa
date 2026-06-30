@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Papa Ji</title>
+
+<!-- ============================================================
+     FONTS
+     Fraunces = warm, characterful display serif (headlines)
+     Karla     = clean humanist body sans
+     DM Mono   = small labels / timeline years
+============================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     AMBIENT PARTICLE LAYER (marigold petals + hearts)
+     This canvas sits behind everything and is controlled by script.js
+============================================================= -->
+<canvas id="petal-canvas"></canvas>
+
+<!-- ============================================================
+     SCROLL PROGRESS THREAD — a marigold garland that fills in
+     as the visitor moves through Papa Ji's story
+============================================================= -->
+<div class="garland-track" aria-hidden="true">
+  <div class="garland-fill" id="garlandFill"></div>
+</div>
+
+<!-- ============================================================
+     SIDE DOT NAVIGATION
+============================================================= -->
+<nav class="dot-nav" aria-label="Section navigation">
+  <a href="#hero" class="dot active" data-label="Welcome"></a>
+  <a href="#hero-portrait" class="dot" data-label="Meet My Hero"></a>
+  <a href="#gallery" class="dot" data-label="Memories"></a>
+  <a href="#timeline" class="dot" data-label="The Journey"></a>
+  <a href="#lessons" class="dot" data-label="Lessons"></a>
+  <a href="#letter" class="dot" data-label="The Letter"></a>
+  <a href="#surprise" class="dot" data-label="A Surprise"></a>
+  <a href="#promise" class="dot" data-label="My Promise"></a>
+  <a href="#finale" class="dot" data-label="Celebration"></a>
+</nav>
+
+<!-- ============================================================
+     MUSIC CONTROL
+     EDIT: drop your file at audio/background-music.mp3
+============================================================= -->
+<button id="musicToggle" class="music-toggle" aria-label="Play background music">
+  <svg class="icon-play" viewBox="0 0 24 24" fill="none"><path d="M5 4.5v15l13-7.5-13-7.5z" fill="currentColor"/></svg>
+  <svg class="icon-pause" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor"/></svg>
+  <span class="music-bars"><i></i><i></i><i></i></span>
+</button>
+<audio id="bgMusic" loop preload="none">
+  <!-- EDIT: replace with the real path to your music file -->
+  <source src="audio/background-music.mp3" type="audio/mpeg">
+</audio>
+
+<main>
+
+  <!-- ============================================================
+       PAGE 1 — HERO
+  ============================================================= -->
+  <section id="hero" class="section hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow reveal-up">a letter, in the shape of a website</p>
+      <h1 class="hero-title">
+        <span class="line" data-line="1">Happy Birthday</span>
+        <span class="line line--accent" data-line="2">Papa Ji <i class="heart">❤</i></span>
+      </h1>
+      <p class="hero-sub reveal-up">To the man who taught me strength, kindness, and perseverance.</p>
+      <a href="#hero-portrait" class="btn-begin reveal-up">
+        <span>Begin the Journey</span>
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 2 — MEET MY HERO
+  ============================================================= -->
+  <section id="hero-portrait" class="section portrait-section">
+    <div class="container two-col">
+      <div class="portrait-frame reveal-side">
+        <!-- EDIT: replace this image source with a real photo of Papa Ji -->
+        <img src="images/photo-hero.jpeg" alt="Papa Ji" class="editable-photo" data-placeholder-text="Add Papa Ji's photo here&#10;(images/photo-hero.jpg)">
+        <div class="frame-petal" aria-hidden="true"></div>
+      </div>
+      <div class="portrait-text reveal-side">
+        <p class="eyebrow">meet my hero</p>
+        <blockquote class="big-quote">
+          Every hero doesn't wear a cape.<br>
+          Some dedicate their lives<br>
+          to their <em>families</em>.
+        </blockquote>
+        <!-- EDIT: replace with your own words about your father -->
+        <p class="body-copy">
+          Papa Ji, you have spent every single day of your life giving more than you ever asked
+          to receive. This page is for the quiet, everyday heroism nobody else got to see —
+          the early mornings, the long days, the worry you never showed us.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 3 — MEMORY GALLERY
+  ============================================================= -->
+  <section id="gallery" class="section gallery-section">
+    <div class="container">
+      <p class="eyebrow center reveal-up">memory gallery</p>
+      <h2 class="section-title center reveal-up">Moments We Kept</h2>
+      <p class="section-sub center reveal-up">Click any photo to look closer.</p>
+
+      <div class="gallery-grid">
+        <!-- EDIT: replace each src with your own photos. Filenames are placeholders. -->
+        <button class="gallery-item reveal-up" data-caption="A memory worth keeping" style="--delay:0">
+          <img src="images/photo1.jpg" alt="Memory one" data-placeholder-text="photo1.jpg">
+        </button>
+        <button class="gallery-item reveal-up" data-caption="A memory worth keeping" style="--delay:1">
+          <img src="images/photo2.jpg" alt="Memory two" data-placeholder-text="photo2.jpg">
+        </button>
+        <button class="gallery-item reveal-up" data-caption="A memory worth keeping" style="--delay:2">
+          <img src="images/photo3.jpg" alt="Memory three" data-placeholder-text="photo3.jpg">
+        </button>
+        <button class="gallery-item reveal-up" data-caption="A memory worth keeping" style="--delay:0">
+          <img src="images/photo4.jpg" alt="Memory one" data-placeholder-text="photo4.jpg">
+        </button>
+        <button class="gallery-item reveal-up" data-caption="A memory worth keeping" style="--delay:4">
+          <img src="images/photo5.jpg" alt="Memory four" data-placeholder-text="photo5.jpg">
+        </button>
+        <button class="gallery-item reveal-up" data-caption="A memory worth keeping" style="--delay:5">
+          <img src="images/photo6.jpg" alt="Memory five" data-placeholder-text="photo6.jpg">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox modal -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8249;</button>
+    <img src="" alt="" id="lightboxImg">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <!-- ============================================================
+       PAGE 4 — JOURNEY TIMELINE
+  ============================================================= -->
+  
+  <!-- ============================================================
+       PAGE 5 — LESSONS YOU TAUGHT ME
+  ============================================================= -->
+  <section id="lessons" class="section lessons-section">
+    <div class="container">
+      <p class="eyebrow center reveal-up">lessons you taught me</p>
+      <h2 class="section-title center reveal-up">Everything I Learned, Watching You</h2>
+
+      <div class="lessons-grid">
+        <div class="lesson-card reveal-up">
+          <svg class="lesson-icon" viewBox="0 0 48 48" fill="none"><path d="M24 6l4 10 11 1-8 8 3 11-10-6-10 6 3-11-8-8 11-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          <h3>Hard Work</h3>
+          <p>You showed me that effort, quietly repeated every day, builds everything that matters.</p>
+        </div>
+        <div class="lesson-card reveal-up">
+          <svg class="lesson-icon" viewBox="0 0 48 48" fill="none"><rect x="10" y="20" width="28" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M16 20v-4a8 8 0 0116 0v4" stroke="currentColor" stroke-width="1.6"/></svg>
+          <h3>Discipline</h3>
+          <p>Rules weren't restrictions — you taught me they were the structure that holds a life together.</p>
+        </div>
+        <div class="lesson-card reveal-up">
+          <svg class="lesson-icon" viewBox="0 0 48 48" fill="none"><path d="M24 8v32M14 16l20 16M34 16L14 32" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <h3>Honesty</h3>
+          <p>You never took the easy lie. I learned the truth is heavier, but it never breaks you.</p>
+        </div>
+        <div class="lesson-card reveal-up">
+          <svg class="lesson-icon" viewBox="0 0 48 48" fill="none"><circle cx="18" cy="16" r="5" stroke="currentColor" stroke-width="1.6"/><circle cx="30" cy="16" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M8 38c1-7 6-11 10-11s9 4 10 11M22 38c1-7 6-11 10-11s8 4 9 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <h3>Family First</h3>
+          <p>No matter what the day cost you, you always came home first — and stayed last.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 6 — GRATITUDE LETTER
+  ============================================================= -->
+  <section id="letter" class="section letter-section">
+    <div class="container narrow">
+      <p class="eyebrow center reveal-up">a letter, finally written</p>
+      <div class="letter-paper reveal-up">
+        <p class="letter-greeting">Dear Papa Ji,</p>
+        <!-- EDIT: this is your real letter. Replace freely — the typing effect will animate whatever is here. -->
+        <p class="letter-body" id="letterBody" data-full-text="There are things I have never known how to say out loud, so I am saying them here instead. Thank you for every sacrifice you never spoke of, every worry you carried alone so we wouldn't have to. Thank you for showing me what it means to give without keeping count. Everything good in me, I learned by simply watching you. I hope this small page can hold even a little of what my heart has been trying to say for years."></p>
+        <p class="letter-sign">With all my love,<br><span>Prashant,Ankita & Lucky</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 7 — INTERACTIVE SURPRISE
+  ============================================================= -->
+  <section id="surprise" class="section surprise-section">
+    <div class="container center-content">
+      <p class="eyebrow center reveal-up">a small surprise</p>
+      <h2 class="section-title center reveal-up">One Gift, Just For You</h2>
+      <p class="section-sub center reveal-up">Tap the box to open it.</p>
+
+      <div class="gift-wrap reveal-up">
+        <button class="gift-box" id="giftBox" aria-label="Open your gift">
+          <span class="gift-lid"></span>
+          <span class="gift-base"></span>
+          <span class="gift-ribbon-v"></span>
+          <span class="gift-ribbon-h"></span>
+          <span class="gift-bow">🎀</span>
+        </button>
+        <div class="gift-reveal" id="giftReveal">
+          <!-- EDIT: change this message to whatever surprise you want to reveal -->
+          <p>"No matter how much life changes, we will always be grateful for the love, 
+            values, and strength you have given our family. ❤️"</p>
+          <span class="gift-flowers" aria-hidden="true">🌼 🌼 🌼</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 8 — MY PROMISE
+  ============================================================= -->
+  <section id="promise" class="section promise-section">
+    <div class="container">
+      <p class="eyebrow center reveal-up">my promise to you</p>
+      <!-- EDIT: replace with your own promise -->
+      <h2 class="promise-text reveal-up">
+        I promise to carry forward<br>
+        everything you gave me —<br>
+        <em>and to never let you carry anything alone again.</em>
+      </h2>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PAGE 9 — GRAND FINALE
+  ============================================================= -->
+  <section id="finale" class="section finale-section">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="container center-content">
+      <h2 class="finale-title reveal-up">Happy Birthday Papa Ji <i class="heart">🎂</i></h2>
+      <p class="finale-line reveal-up">Thank you for every sacrifice.</p>
+      <p class="finale-line reveal-up">Thank you for every lesson.</p>
+      <p class="finale-line reveal-up">Thank you for every moment.</p>
+      <p class="finale-sign reveal-up">With All Our Love,<br><span>Your Children ❤️❤</span></p>
+
+      <button class="btn-confetti" id="celebrateBtn">Celebrate Again 🎉</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL SCREEN
+  ============================================================= -->
+  <footer class="final-screen">
+    <p class="reveal-up">We are waiting for you 😊</p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
